@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "learn-cli"
+version = "0.1.0"
+description = "Lightweight git-based CLI for personal knowledge management (Zettelkasten + CODE + PARA)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "learn-cli" }]
+keywords = ["zettelkasten", "para", "code", "pkm", "notes", "cli", "git"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+    "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = [
+    "typer>=0.12,<1.0",
+    "rich>=13.0",
+    "python-frontmatter>=1.1",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+learn = "learn_cli.cli:main"
+
+[project.urls]
+Homepage = "https://example.invalid/learn-cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/learn_cli"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/learn_cli/templates" = "learn_cli/templates"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
