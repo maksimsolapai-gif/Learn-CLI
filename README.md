@@ -38,6 +38,25 @@ learn --version
 learn --help
 ```
 
+### Windows: если `learn` не найден в PowerShell/cmd
+
+Иногда `learn.exe` ставится в папку Python Scripts, которая не попадает в `PATH`.
+Добавьте её один раз в пользовательский `PATH`:
+
+```powershell
+$scripts = py -c "import sysconfig; print(sysconfig.get_path('scripts'))"
+$current = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($current -notlike "*$scripts*") {
+  [Environment]::SetEnvironmentVariable("Path", "$current;$scripts", "User")
+}
+```
+
+Перезапустите терминал и проверьте:
+
+```powershell
+learn --version
+```
+
 ## Быстрый старт
 
 ```bash
